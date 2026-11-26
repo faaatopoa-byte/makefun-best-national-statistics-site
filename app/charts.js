@@ -17,8 +17,8 @@ export function barChart(items, options) {
   const width = opts.width || 560;
   const height = opts.height || 300;
   const barColor = opts.color || '#0e4a3f';
-  const padTop = 34;
-  const padBottom = 44;
+  const padTop = 28;
+  const padBottom = 38;
   const padLeft = 16;
   const padRight = 16;
   const plotW = width - padLeft - padRight;
@@ -27,6 +27,10 @@ export function barChart(items, options) {
   const slot = plotW / items.length;
   const barW = Math.min(64, slot * 0.58);
   let out = '<svg viewBox="0 0 ' + width + ' ' + height + '" role="img" aria-label="' + esc(opts.label || 'Grafik batang') + '">';
+  [0.25, 0.5, 0.75].forEach(function (f) {
+    const gy = padTop + plotH - f * plotH;
+    out += '<line x1="' + padLeft + '" y1="' + gy.toFixed(1) + '" x2="' + (width - padRight) + '" y2="' + gy.toFixed(1) + '" stroke="#e6e0d0" stroke-width="1"/>';
+  });
   out += '<line x1="' + padLeft + '" y1="' + (padTop + plotH) + '" x2="' + (width - padRight) + '" y2="' + (padTop + plotH) + '" stroke="#c9c2b2" stroke-width="1"/>';
   items.forEach(function (item, i) {
     const h = Math.max(4, (item.value / max) * plotH);
@@ -53,6 +57,10 @@ export function hbarChart(items, options) {
   const plotW = width - labelW - valueW - 12;
   const max = Math.max.apply(null, items.map(function (i) { return i.value; }));
   let out = '<svg viewBox="0 0 ' + width + ' ' + height + '" role="img" aria-label="' + esc(opts.label || 'Grafik batang horizontal') + '">';
+  [0.25, 0.5, 0.75].forEach(function (f) {
+    const gx = labelW + f * plotW;
+    out += '<line x1="' + gx.toFixed(1) + '" y1="8" x2="' + gx.toFixed(1) + '" y2="' + (height - 8) + '" stroke="#e6e0d0" stroke-width="1"/>';
+  });
   items.forEach(function (item, i) {
     const y = 16 + i * rowH;
     const w = Math.max(4, (item.value / max) * plotW);
@@ -86,6 +94,10 @@ export function lineChart(points, options) {
   function px(i) { return padLeft + (points.length === 1 ? plotW / 2 : (i / (points.length - 1)) * plotW); }
   function py(v) { return padTop + plotH - ((v - min) / (max - min)) * plotH; }
   let out = '<svg viewBox="0 0 ' + width + ' ' + height + '" role="img" aria-label="' + esc(opts.label || 'Grafik garis') + '">';
+  [0.25, 0.5, 0.75].forEach(function (f) {
+    const gy = padTop + plotH - f * plotH;
+    out += '<line x1="' + padLeft + '" y1="' + gy.toFixed(1) + '" x2="' + (width - padRight) + '" y2="' + gy.toFixed(1) + '" stroke="#e6e0d0" stroke-width="1"/>';
+  });
   out += '<line x1="' + padLeft + '" y1="' + (padTop + plotH) + '" x2="' + (width - padRight) + '" y2="' + (padTop + plotH) + '" stroke="#c9c2b2" stroke-width="1"/>';
   let path = '';
   points.forEach(function (p, i) {

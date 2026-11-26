@@ -57,10 +57,33 @@ function paintTable(tableId, rows) {
   const table = document.getElementById(tableId);
   if (!table) return;
   const body = table.querySelector('tbody');
+  const cols = table.querySelectorAll('thead th').length;
+  if (rows.length === 0) {
+    body.innerHTML = '<tr><td colspan="' + cols + '" class="empty">Tidak ada provinsi yang cocok.</td></tr>';
+    return;
+  }
   body.innerHTML = rows.map(function (r) {
-    return '<tr><td>' + r.rank + '</td><td>' + r.name + '</td><td class="num">' + r.a + '</td><td class="num">' + r.b + '</td></tr>';
+    return '<tr><td>' + r.rank + '</td><td>' + r.name + '</td><td class="num">' + r.a + '</td>' + (r.b !== undefined ? '<td class="num">' + r.b + '</td>' : '') + '</tr>';
   }).join('');
 }
+
+function paintSortIndicators() {
+  document.querySelectorAll('#prov-tables th.sortable').forEach(function (th) {
+    const table = th.closest('table');
+    const key = th.getAttribute('data-sort');
+    const which = table.id === 'tbl-pop' ? sortState.pop : sortState.pdrb;
+    const arrow = th.querySelector('.sort-arrow');
+    if (which.key === key) {
+      th.setAttribute('aria-sort', which.dir === 1 ? 'ascending' : 'descending');
+      if (arrow) arrow.textContent = which.dir === 1 ? '▲' : '▼';
+    } else {
+      th.setAttribute('aria-sort', 'none');
+      if (arrow) arrow.textContent = '';
+    }
+  });
+}
+
+let sortState = { pop: { key: 'rank', dir: 1 }, pdrb: { key: 'rank', dir: 1 } };
 
 function bindProvinsi() {
   const wrap = document.getElementById('prov-tables');
@@ -68,12 +91,13 @@ function bindProvinsi() {
   if (!wrap || !search) return;
   const pop = JSON.parse(wrap.getAttribute('data-pop'));
   const pdrb = JSON.parse(wrap.getAttribute('data-pdrb'));
-  const state = { pop: { rows: pop, key: 'rank', dir: 1 }, pdrb: { rows: pdrb, key: 'rank', dir: 1 } };
+  const state = sortState;
   function apply() {
     const q = search.value.trim().toLowerCase();
     const filter = function (rows) { return rows.filter(function (r) { return r.name.toLowerCase().indexOf(q) !== -1; }); };
     paintTable('tbl-pop', sortRows(filter(pop), state.pop.key, state.pop.dir));
     paintTable('tbl-pdrb', sortRows(filter(pdrb), state.pdrb.key, state.pdrb.dir));
+    paintSortIndicators();
   }
   search.addEventListener('input', apply);
   document.querySelectorAll('#prov-tables th.sortable').forEach(function (th) {
@@ -90,6 +114,7 @@ function bindProvinsi() {
       if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); toggle(); }
     });
   });
+  paintSortIndicators();
 }
 
 function render() {

@@ -12,10 +12,11 @@ export const SOURCES = {
   pdb2024: 'BPS, BRS 5 Feb 2025',
   inflasi2024: 'BPS, BRS No. 01/01/Th. XXVIII, 2 Jan 2025',
   inflasi2023: 'BPS, via Bank Indonesia, Des 2023',
-  inflasi2025: 'BPS, dilaporkan TVRI/Informasi, 2025 (sumber sekunder)',
+  inflasi2025: 'BPS via TVRI, Des 2025 (sumber sekunder)',
   sakernas2025: 'BPS, BRS No. 44/05/Th. XXVIII, 5 Mei 2025 (Sakernas Feb 2025)',
+  sakernasAgu2025: 'BPS, BRS No. 103/11/Th. XXVIII, 5 Nov 2025 (Sakernas Agu 2025)',
   kemiskinan2025: 'BPS, Profil Kemiskinan, 25 Jul 2025 (Susenas Mar 2025)',
-  kemiskinanSep2025: 'BPS, dilaporkan media, Sep 2025 (sumber sekunder)',
+  kemiskinanSep2025: 'BPS via Bandung Bergerak, Sep 2025 (sumber sekunder)',
   pendidikan2024: 'BPS, Statistik Pendidikan 2024 (Susenas)',
   literasi2024: 'BPS, Tabel Angka Melek Aksara, 2024',
   literasi2025: 'BPS, Tabel Angka Melek Aksara, 2025',
@@ -25,6 +26,7 @@ export const SOURCES = {
   ipmProvinsi: 'BPS, IPM menurut Provinsi, 2025',
   pdrb2024: 'BPS, Buletin PUSAKA BPS Kota Jakarta Pusat, Agu 2025',
   pdrb2025: 'BPS, Seri PDRB Regional 2025, via Wikipedia (sumber sekunder)',
+  javaShare2025: 'BPS via Kadin, 2025 (sumber sekunder)',
   dagang2024: 'BPS, via Kementerian Perdagangan, Laporan Bulanan PDSI, 2024',
   dagang2025: 'BPS, via Antara, 2025 (sumber sekunder)',
   komoditas2024: 'BPS, data ekspor 2024',
@@ -34,12 +36,12 @@ export const SOURCES = {
 };
 
 export const KPI = [
-  { label: 'Penduduk', value: '284,44 jt', note: 'pertengahan tahun, proyeksi BPS', source: SOURCES.penduduk2025, route: '#/penduduk' },
-  { label: 'PDB', value: 'Rp 23.821,1 T', note: 'harga berlaku, tumbuh 5,11%', source: SOURCES.pdb2025, route: '#/ekonomi' },
-  { label: 'Inflasi', value: '1,57%', note: 'tahun kalender, terendah sepanjang sejarah BPS', source: SOURCES.inflasi2024, route: '#/harga' },
-  { label: 'Pengangguran (TPT)', value: '4,76%', note: 'Feb 2025, terendah sejak krisis 1998', source: SOURCES.sakernas2025, route: '#/ketenagakerjaan' },
-  { label: 'Kemiskinan', value: '8,47%', note: 'Mar 2025, 23,85 juta orang', source: SOURCES.kemiskinan2025, route: '#/ekonomi' },
-  { label: 'IPM', value: '75,90', note: '2025, naik dari 75,02 pada 2024', source: SOURCES.ipm2025, route: '#/kesehatan' }
+  { label: 'Penduduk', period: '2025', value: '284,44 jt', note: 'pertengahan tahun, proyeksi BPS', source: SOURCES.penduduk2025, srcShort: 'BPS, Penduduk Pertengahan Tahun 2025', route: '#/penduduk' },
+  { label: 'PDB', period: '2025', value: 'Rp 23.821,1 T', note: 'harga berlaku, tumbuh 5,11%', source: SOURCES.pdb2025, srcShort: 'BPS, BRS 5 Feb 2026', route: '#/ekonomi' },
+  { label: 'Inflasi', period: 'Des 2025', value: '2,92%', note: '2024: 1,57%, terendah sepanjang sejarah', source: SOURCES.inflasi2025, srcShort: 'BPS via TVRI, Des 2025 (sumber sekunder)', route: '#/harga' },
+  { label: 'Pengangguran (TPT)', period: 'Feb 2025', value: '4,76%', note: 'terendah sejak krisis 1998; Agu 2025: 4,85%', source: SOURCES.sakernas2025, srcShort: 'BPS, Sakernas Feb 2025, BRS No. 44/05', route: '#/ketenagakerjaan' },
+  { label: 'Kemiskinan', period: 'Sep 2025', value: '8,25%', note: '23,36 juta orang; Mar 2025: 8,47% (BPS, 23,85 jt orang)', source: SOURCES.kemiskinanSep2025, srcShort: 'BPS via Bandung Bergerak (sumber sekunder)', route: '#/ekonomi' },
+  { label: 'IPM', period: '2025', value: '75,90', note: 'naik dari 75,02 pada 2024', source: SOURCES.ipm2025, srcShort: 'BPS, IPM 2025 (BRS 5 Nov 2025)', route: '#/kesehatan' }
 ];
 
 export const POPULATION = {
@@ -72,6 +74,7 @@ export const GDP = {
   constant2025: 'Rp 13.580,5 T',
   q4_2025: '5,39% (y-on-y)',
   javaShare2024: '57,04%',
+  javaShare2025: '56,93%',
   pdrb2024: [
     { name: 'DKI Jakarta', value: 'Rp 3.679,35 T', share: '16,71%' },
     { name: 'Jawa Timur', value: 'Rp 3.168,30 T', share: '14,39%' },
@@ -80,11 +83,11 @@ export const GDP = {
     { name: 'Sumatera Utara', value: 'Rp 1.146,92 T', share: '5,21%' }
   ],
   pdrb2025: [
-    { name: 'DKI Jakarta', value: 'Rp 3.926 T', share: '-' },
-    { name: 'Jawa Timur', value: 'Rp 3.403 T', share: '-' },
-    { name: 'Jawa Barat', value: 'Rp 3.039 T', share: '-' },
-    { name: 'Jawa Tengah', value: 'Rp 1.943 T', share: '-' },
-    { name: 'Sumatera Utara', value: 'Rp 1.236 T', share: '-' }
+    { name: 'DKI Jakarta', value: 'Rp 3.926,2 T', share: '-' },
+    { name: 'Jawa Timur', value: 'Rp 3.403,2 T', share: '-' },
+    { name: 'Jawa Barat', value: 'Rp 3.038,7 T', share: '-' },
+    { name: 'Jawa Tengah', value: 'Rp 1.943,2 T', share: '-' },
+    { name: 'Sumatera Utara', value: 'Rp 1.236,2 T', share: '-' }
   ]
 };
 
@@ -97,6 +100,22 @@ export const INFLATION = {
 };
 
 export const LABOUR = {
+  feb2025: {
+    tpt: '4,76%',
+    unemployed: '7,28 juta orang',
+    labourForce: '153,05 juta orang',
+    employed: '145,77 juta orang',
+    workingAge: '216,79 juta orang',
+    wageAvg: 'Rp 3,09 jt'
+  },
+  aug2025: {
+    tpt: '4,85%',
+    unemployed: '7,46 juta orang',
+    labourForce: '154,00 juta orang',
+    employed: '146,54 juta orang',
+    workingAge: '218,17 juta orang',
+    wageAvg: 'Rp 3,33 jt'
+  },
   tpt: '4,76%',
   tpt2024: '4,82%',
   unemployed: '7,28 juta orang',
@@ -194,7 +213,11 @@ export const SOURCE_LIST = [
   { name: 'Pertumbuhan Ekonomi Indonesia, BRS 5 Feb 2025', publisher: 'BPS', year: '2025' },
   { name: 'Perkembangan Indeks Harga Konsumen, BRS No. 01/01/Th. XXVIII', publisher: 'BPS', year: '2025' },
   { name: 'Keadaan Ketenagakerjaan, BRS No. 44/05/Th. XXVIII (Sakernas Feb 2025)', publisher: 'BPS', year: '2025' },
+  { name: 'Keadaan Ketenagakerjaan, BRS No. 103/11/Th. XXVIII (Sakernas Agu 2025)', publisher: 'BPS', year: '2025' },
   { name: 'Profil Kemiskinan di Indonesia, Susenas Mar 2025', publisher: 'BPS', year: '2025' },
+  { name: 'Profil Kemiskinan September 2025, dilaporkan Bandung Bergerak (sumber sekunder)', publisher: 'BPS via media', year: '2025' },
+  { name: 'Inflasi Desember 2025, dilaporkan TVRI (sumber sekunder)', publisher: 'BPS via TVRI', year: '2025' },
+  { name: 'Profil Ekonomi Indonesia, pangsa Jawa atas PDB 2025 (sumber sekunder)', publisher: 'BPS via Kadin', year: '2025' },
   { name: 'Statistik Pendidikan 2024 (Susenas)', publisher: 'BPS', year: '2024' },
   { name: 'Tabel Angka Melek Aksara Penduduk 15 Tahun ke Atas', publisher: 'BPS', year: '2024-2025' },
   { name: 'Statistik Pemuda Indonesia 2024', publisher: 'BPS', year: '2024' },
