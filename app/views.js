@@ -36,10 +36,10 @@ export function renderDashboard() {
   const gdpBars = barChart([
     { label: '2024', value: 22139.0, display: 'Rp 22.139 T' },
     { label: '2025', value: 23821.1, display: 'Rp 23.821 T' }
-  ], { label: 'PDB harga berlaku 2024 dan 2025' });
+  ], { label: 'PDB harga berlaku 2024 dan 2025', height: 180 });
   const popBars = hbarChart(POPULATION.top5.map(function (p) {
     return { label: p.name, value: p.value, display: p.display };
-  }), { label: 'Lima provinsi dengan penduduk terbanyak, 2024' });
+  }), { label: 'Lima provinsi dengan penduduk terbanyak, 2024', rowHeight: 34 });
   const links = NAV.slice(1).map(function (n) {
     const blurb = {
       '#/penduduk': '284,44 juta jiwa pada 2025',
@@ -54,14 +54,16 @@ export function renderDashboard() {
     return '<a class="link-card" href="' + n.route + '"><strong>' + n.label + '</strong><span>' + blurb + '</span></a>';
   }).join('');
   return pageHead('Statistik Indonesia, 2024-2025',
-    'Angka resmi Indonesia dalam satu tempat. Penduduk, ekonomi, kesehatan, pendidikan, pekerjaan, harga, dan provinsi, semua dengan sumber dan tahunnya.')
+    'Penduduk, ekonomi, kesehatan, pendidikan, pekerjaan, harga, dan provinsi, lengkap dengan sumber dan tahunnya.')
     + '<div class="kpi-grid">' + KPI.map(kpiCard).join('') + '</div>'
     + '<div class="two-col"><section class="panel"><h2>PDB naik dua tahun berturut-turut</h2>'
-    + '<p>PDB harga berlaku naik dari Rp 22.139,0 triliun pada 2024 menjadi Rp 23.821,1 triliun pada 2025. Pertumbuhannya 5,11% pada 2025, sedikit di atas 5,03% pada 2024.</p>'
-    + '<div class="chart-wrap">' + gdpBars + '</div>' + src(SOURCES.pdb2025 + '; ' + SOURCES.pdb2024) + '</section>'
+    + '<div class="chart-wrap">' + gdpBars + '</div>'
+    + '<p>PDB harga berlaku naik dari Rp 22.139,0 triliun pada 2024 menjadi Rp 23.821,1 triliun pada 2025. Pertumbuhannya 5,11%, sedikit di atas 5,03% setahun sebelumnya.</p>'
+    + src(SOURCES.pdb2025 + '; ' + SOURCES.pdb2024) + '</section>'
     + '<section class="panel"><h2>Penduduk terbanyak ada di Jawa</h2>'
+    + '<div class="chart-wrap">' + popBars + '</div>'
     + '<p>Lima provinsi teratas dihuni 158,05 juta orang. Jawa Barat sendiri 50,35 juta jiwa, hampir seperlima penduduk Indonesia.</p>'
-    + '<div class="chart-wrap">' + popBars + '</div>' + src(SOURCES.penduduk2024) + '</section></div>'
+    + src(SOURCES.penduduk2024) + '</section></div>'
     + '<section class="panel"><h2>Perdagangan: surplus US$ 31,04 miliar pada 2024</h2>'
     + '<p>Ekspor US$ 264,70 miliar, impor US$ 233,66 miliar. Surplus ini sudah berjalan 55 bulan berturut-turut sejak Mei 2020. Komoditas ekspor terbesar adalah batu bara (US$ 30,49 miliar), disusul minyak kelapa sawit (US$ 22,87 miliar).</p>'
     + '<p>Pada 2025, surplus naik menjadi US$ 41,05 miliar menurut laporan sekunder Antara yang mengutip BPS.</p>'
@@ -100,7 +102,7 @@ export function renderEkonomi(year) {
   const growthBars = barChart([
     { label: '2024', value: 5.03, display: '5,03%' },
     { label: '2025', value: 5.11, display: '5,11%' }
-  ], { label: 'Pertumbuhan PDB 2024 dan 2025', color: '#b4761c' });
+  ], { label: 'Pertumbuhan PDB 2024 dan 2025', color: '#b4761c', height: 210 });
   const pdrbRows = GDP.pdrb2024.map(function (p, i) {
     return '<tr><td>' + (i + 1) + '</td><td>' + p.name + '</td><td class="num">' + p.value + '</td><td class="num">' + p.share + '</td></tr>';
   }).join('');
@@ -115,8 +117,9 @@ export function renderEkonomi(year) {
     + statCard(GDP.javaShare2024, 'PDB berasal dari Pulau Jawa, 2024', SOURCES.pdb2024)
     + '</div>'
     + '<div class="two-col"><section class="panel"><h2>Pertumbuhan dua tahun terakhir</h2>'
+    + '<div class="chart-wrap">' + growthBars + '</div>'
     + '<p>Pertumbuhan 2025 (5,11%) sedikit lebih cepat dari 2024 (5,03%). Triwulan IV 2025 tumbuh 5,39% dibanding triwulan yang sama setahun sebelumnya.</p>'
-    + '<div class="chart-wrap">' + growthBars + '</div>' + src(SOURCES.pdb2025 + '; ' + SOURCES.pdb2024) + '</section>'
+    + src(SOURCES.pdb2025 + '; ' + SOURCES.pdb2024) + '</section>'
     + '<section class="panel"><h2>Tahun lainnya</h2>'
     + '<p>Pada ' + other + ', PDB ' + GDP.byYear[other].total + ' dengan pertumbuhan ' + GDP.byYear[other].growth + ' dan PDB per kapita ' + GDP.byYear[other].perCapita + ' (' + GDP.byYear[other].perCapitaUsd + ').</p>'
     + '<p>PDB harga konstan 2010 pada 2025 sebesar ' + GDP.constant2025 + '.</p>'
@@ -132,7 +135,7 @@ export function renderKesehatan() {
   const ipmLine = lineChart([
     { label: '2024', value: 75.02, display: '75,02' },
     { label: '2025', value: 75.90, display: '75,90' }
-  ], { label: 'Indeks Pembangunan Manusia 2024 dan 2025' });
+  ], { label: 'Indeks Pembangunan Manusia 2024 dan 2025', height: 220 });
   return pageHead('Kesehatan',
     'Umur harapan hidup orang Indonesia 74,15 tahun pada 2024 menurut seri Indeks Pembangunan Manusia BPS. Angka itu naik menjadi 74,47 tahun pada 2025.')
     + '<div class="stat-row">'
@@ -159,7 +162,7 @@ export function renderPendidikan() {
   const litBars = barChart([
     { label: '2024', value: 96.67, display: '96,67%' },
     { label: '2025', value: 97.10, display: '97,10%' }
-  ], { label: 'Angka melek aksara usia 15 tahun ke atas', color: '#0e4a3f' });
+  ], { label: 'Angka melek aksara usia 15 tahun ke atas', color: '#0e4a3f', height: 220 });
   return pageHead('Pendidikan',
     'Angka partisipasi sekolah (APS) menjawab satu pertanyaan sederhana: dari 100 anak di satu kelompok umur, berapa yang bersekolah. Di usia sekolah dasar hampir semua anak bersekolah, tapi di usia 16-18 tahun sekitar 1 dari 4 remaja tidak sekolah.')
     + '<div class="aps-row">' + cards + '</div>'
@@ -178,7 +181,7 @@ export function renderKetenagakerjaan() {
   const tptBars = barChart([
     { label: 'Feb 2024', value: 4.82, display: '4,82%' },
     { label: 'Feb 2025', value: 4.76, display: '4,76%' }
-  ], { label: 'Tingkat pengangguran terbuka Februari 2024 dan 2025', color: '#0e4a3f' });
+  ], { label: 'Tingkat pengangguran terbuka Februari 2024 dan 2025', color: '#0e4a3f', height: 220 });
   return pageHead('Ketenagakerjaan',
     'Tingkat pengangguran terbuka 4,76% pada Februari 2025, terendah sejak krisis 1998 menurut BPS. Ada 7,28 juta orang menganggur dari angkatan kerja 153,05 juta orang.')
     + '<div class="stat-row">'
@@ -208,7 +211,7 @@ export function renderHarga(year) {
   const bars = barChart([
     { label: 'Des 2023', value: 2.61, display: '2,61%' },
     { label: 'Des 2024', value: 1.57, display: '1,57%' }
-  ], { label: 'Inflasi year-on-year Desember 2023 dan 2024', color: '#0e4a3f' });
+  ], { label: 'Inflasi year-on-year Desember 2023 dan 2024', color: '#0e4a3f', height: 220 });
   return pageHead('Harga dan Inflasi',
     'Inflasi 2024 hanya 1,57%, terendah sepanjang sejarah pencatatan BPS. Indeks Harga Konsumen Desember 2024 berada di 106,80 (2022 = 100).')
     + '<div class="tabs" role="group" aria-label="Pilih tahun"><button type="button" data-year="2024" aria-pressed="' + (y === '2024') + '">2024 (BPS)</button>'

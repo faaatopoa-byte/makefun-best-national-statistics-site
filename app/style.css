@@ -36,7 +36,7 @@ body {
 a { color: var(--teal); }
 a:focus-visible, button:focus-visible, input:focus-visible, th:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
 h1, h2, h3 { font-family: var(--font-display); color: var(--ink); line-height: 1.2; margin: 0 0 8px 0; }
-h1 { font-size: 34px; }
+h1 { font-size: 30px; }
 h2 { font-size: 24px; }
 h3 { font-size: 19px; }
 p { margin: 0 0 12px 0; }
@@ -45,11 +45,11 @@ p { margin: 0 0 12px 0; }
 .source { font-size: 13px; color: var(--ink-faint); margin-top: 6px; }
 
 .topbar { background: var(--teal-dark); color: var(--paper); }
-.topbar-inner { max-width: var(--measure); margin: 0 auto; padding: 14px 20px 0 20px; }
+.topbar-inner { max-width: var(--measure); margin: 0 auto; padding: 10px 20px 0 20px; }
 .brand { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
 .brand-name { font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--paper); text-decoration: none; }
 .brand-tag { font-size: 14px; color: var(--amber-soft); }
-nav.main-nav { display: flex; gap: 4px; flex-wrap: wrap; padding: 10px 0 0 0; }
+nav.main-nav { display: flex; gap: 4px; flex-wrap: wrap; padding: 6px 0 0 0; }
 nav.main-nav a {
   color: var(--paper);
   text-decoration: none;
@@ -61,16 +61,16 @@ nav.main-nav a {
 nav.main-nav a:hover { background: var(--teal); }
 nav.main-nav a.active { background: var(--paper); color: var(--teal-dark); font-weight: 700; border-bottom-color: var(--amber); }
 
-main { max-width: var(--measure); margin: 0 auto; padding: var(--gap-large) 20px 40px 20px; }
-.page-head { margin-bottom: 22px; }
+main { max-width: var(--measure); margin: 0 auto; padding: 12px 20px 40px 20px; }
+.page-head { margin-bottom: 10px; }
 .page-head h1 { margin-bottom: 6px; }
 
-.kpi-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); margin-bottom: var(--gap-large); }
+.kpi-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-bottom: 16px; }
 .kpi {
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 18px 18px 14px 18px;
+  padding: 10px 14px 8px 14px;
   box-shadow: var(--shadow);
   text-decoration: none;
   color: var(--ink);
@@ -78,14 +78,15 @@ main { max-width: var(--measure); margin: 0 auto; padding: var(--gap-large) 20px
 }
 a.kpi:hover { border-color: var(--teal); }
 .kpi-label { font-size: 14px; color: var(--ink-soft); margin-bottom: 4px; }
-.kpi-value { font-family: var(--font-display); font-size: 36px; font-weight: 700; line-height: 1.1; color: var(--teal-dark); }
-.kpi-note { font-size: 14px; color: var(--ink-soft); margin-top: 6px; }
+.kpi-value { font-family: var(--font-display); font-size: 28px; font-weight: 700; line-height: 1.1; color: var(--teal-dark); }
+.kpi-note { font-size: 14px; color: var(--ink-soft); margin-top: 4px; }
+.kpi .source { margin-top: 2px; }
 
 .panel {
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 20px;
+  padding: 18px;
   box-shadow: var(--shadow);
   margin-bottom: var(--gap-large);
   min-width: 0;
@@ -94,10 +95,10 @@ a.kpi:hover { border-color: var(--teal); }
 .panel h3 { margin-bottom: 4px; }
 .two-col { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--gap); }
 .two-col > .panel { margin-bottom: 0; }
-.chart-wrap { margin-top: 12px; }
+.chart-wrap { margin-top: 8px; }
 .chart-wrap svg { width: 100%; height: auto; display: block; }
 
-.stat-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); margin-bottom: var(--gap-large); }
+.stat-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); margin-bottom: 16px; }
 .stat {
   background: var(--card);
   border: 1px solid var(--line);
@@ -198,8 +199,8 @@ footer.site-footer h2 { font-size: 17px; }
 @media (max-width: 480px) {
   .kpi-grid { grid-template-columns: minmax(0, 1fr); }
   .stat-row { grid-template-columns: minmax(0, 1fr); }
-  nav.main-nav { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 6px; }
-  nav.main-nav a { white-space: nowrap; }
+  nav.main-nav { flex-wrap: wrap; overflow-x: visible; padding-bottom: 4px; }
+  nav.main-nav a { white-space: nowrap; font-size: 13px; padding: 7px 9px; }
   main { padding-top: 20px; }
 }
 @media (prefers-reduced-motion: reduce) {
